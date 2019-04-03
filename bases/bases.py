@@ -48,7 +48,7 @@ def decode(digits, base):
             power -= 1
             sum += string.printable.index(value.lower()) * math.pow(base, power)
         return int(sum)
-        
+
 
 def encode(number, base):
     """Encode given number in base 10 to digits in given base.
@@ -60,7 +60,28 @@ def encode(number, base):
     # Handle unsigned numbers only for now
     assert number >= 0, 'number is negative: {}'.format(number)
     # TODO: Encode number in binary (base 2)
-    # ...
+        """
+        Divide the decimal number by 2.
+        Write the result underneath. (number // 2)  Write the remainder on the right hand side. This will be 0 or 1. (number % 2)
+        Divide the result of the division by 2 and again write down the remainder.
+        Continue dividing and writing down remainders until the result of the division is 0.
+        The most significant bit (MSB) is at the bottom of the column of remainders and the least significant bit (LSB) is at the top.
+        Read the series of 1s and 0s on the right from the bottom up. This is the binary equivalent of the decimal number.
+        """
+    if base == 2:
+        returnValue = ''
+
+        if number == 0:
+            return number
+
+        while number != 0 :
+            remainder = number % 2
+            returnValue = str(remainder) + returnValue 
+
+            number = number // 2
+
+        return returnValue
+
     # TODO: Encode number in hexadecimal (base 16)
     # ...
     # TODO: Encode number in any base (2 up to 36)
@@ -104,4 +125,10 @@ def main():
 
 if __name__ == '__main__':
     # main()
-    print(decode('acz', 36))
+    # print(decode('123', 10))
+    print(encode(237, 2))
+    print(encode(1, 2))
+    print(encode(0, 2))
+    print(encode(15, 2))
+    print(encode(54, 2))
+    print(encode(255, 2))
