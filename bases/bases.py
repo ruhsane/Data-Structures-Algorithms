@@ -69,7 +69,7 @@ def encode(number, base):
         returnValue = ''
 
         if number == 0:
-            return number
+            return '0'
 
         while number != 0 :
             remainder = number % 2
@@ -92,7 +92,7 @@ def encode(number, base):
         returnValue = ''
 
         if number == 0:
-            return number
+            return '0'
 
         while number != 0 :
             remainder = string.hexdigits[number % 16]
@@ -110,7 +110,7 @@ def encode(number, base):
         returnValue = ''
 
         if number == 0:
-            return number
+            return '0'
 
         while number != 0 :
             remainder = string.printable[number % base]
@@ -131,43 +131,14 @@ def convert(digits, base1, base2):
     # Handle up to base 36 [0-9a-z]
     assert 2 <= base1 <= 36, 'base1 is out of range: {}'.format(base1)
     assert 2 <= base2 <= 36, 'base2 is out of range: {}'.format(base2)
-    # TODO: Convert digits from base 2 to base 16 (and vice versa)
     
     # exclude spaces from the inputted binary digit
     digits = digits.replace(" ", "")
 
-    if (base1 == 2 & base2 == 16) or (base1 == 16 & base2 == 2):
-        finalResult = ''
-
-        # make sure the input is sectioned by 4
-        zeroNeededinfront = 4- (len(digits) % 4)
-        if zeroNeededinfront != 4 :
-            digits = '0' * zeroNeededinfront + digits
-        
-        # we are gonna loop through the sections of the input (each includes 4 numbers) and convert each section to hex
-        # start at index 3, grab four numbers before current index including current index, until the end of the digits
-        for i in range(3, len(digits), 4):
-            section = digits[i-3:i+1]
-            # decode this section binaryToDecimal/hexToDecimal
-            decimal = decode(section, base1)
-            # encode this section's decimal into hex/binary
-            resultOfSection = str(encode(decimal, base2))
-
-            finalResult += resultOfSection
-
-        return finalResult
-
-    # TODO: Convert digits from base 2 to base 10 (and vice versa)
-    # ...
-    # TODO: Convert digits from base 10 to base 16 (and vice versa)
-    # ...
-    # TODO: Convert digits from any base to any base (2 up to 36)
-    # ...
-
-    else:
-        decimal = decode(digits, base1)
-        result = str(encode(decimal, base2))
-        return result
+    # Convert digits from any base to any base (2 up to 36)
+    base10 = decode(digits, base1)
+    result = str(encode(base10, base2))
+    return result
 
 def main():
     """Read command-line arguments and convert given digits between bases."""
@@ -187,8 +158,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
-    decimal = decode('11001001', 2)
-    print(decimal)
-    result = str(encode(decimal, 16))
-    print(result)
