@@ -87,7 +87,7 @@ def encode(number, base):
     # ...
     '''
         Divide the number by 16.
-        Get the remainder for the hex digit.
+        Get the remainder for the hex digit. and write from right to left each iteration
         Get the integer quotient for the next iteration.
         Repeat the steps until the quotient is equal to 0.
     '''
@@ -109,6 +109,20 @@ def encode(number, base):
 
     # TODO: Encode number in any base (2 up to 36)
     # ...
+    else:
+        returnValue = ''
+
+        if number == 0:
+            return number
+
+        while number != 0 :
+            remainder = string.printable[number % base].upper()
+            returnValue = str(remainder) + returnValue 
+
+            # get integer quotient for the next iteration
+            number = number // base
+
+        return returnValue
 
 
 def convert(digits, base1, base2):
@@ -149,9 +163,9 @@ def main():
 if __name__ == '__main__':
     # main()
     # print(decode('123', 10))
-    print(encode(237, 16))
-    print(encode(1, 16))
-    print(encode(0, 16))
-    print(encode(15, 16))
-    print(encode(54, 16))
-    print(encode(255, 16))
+    print(encode(237, 36))
+    print(encode(1, 36))
+    print(encode(0, 36))
+    print(encode(15, 36))
+    print(encode(54, 36))
+    print(encode(255, 36))
