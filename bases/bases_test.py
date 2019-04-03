@@ -209,8 +209,10 @@ class BasesConvertTest(unittest.TestCase):
         assert convert('101', 10, 2) == '1100101'
         assert convert('101', 16, 2) == '100000001'
         assert convert('101', 25, 2) == '1001110010'
+        assert convert('hAlFcAp', 26, 2) == '101000000101100000001101101110101'
         assert convert('101', 32, 2) == '10000000001'
         assert convert('101', 36, 2) == '10100010001'
+        assert convert('CAPITAL', 36, 2) == '11000111011100011010100010111001101'
 
     def test_convert_hexadecimal_to_decimal(self):
         assert convert('a', 16, 10) == '10'
@@ -225,6 +227,7 @@ class BasesConvertTest(unittest.TestCase):
         assert convert('facade', 16, 10) == '16435934'
         assert convert('deadbeef', 16, 10) == '3735928559'
         assert convert('f007ba11', 16, 10) == '4027038225'
+        assert convert('CAB', 16, 10) == '3243'
 
     def test_convert_decimal_to_hexadecimal(self):
         assert convert('10', 10, 16) == 'a'
@@ -251,6 +254,7 @@ class BasesConvertTest(unittest.TestCase):
         assert convert('d951', 16, 2) == '1101100101010001'
         assert convert('ea62', 16, 2) == '1110101001100010'
         assert convert('fb73', 16, 2) == '1111101101110011'
+        assert convert('CAB', 16, 2) == '110010101011'
 
     def test_convert_binary_to_hexadecimal(self):
         assert convert('1010', 2, 16) == 'a'
