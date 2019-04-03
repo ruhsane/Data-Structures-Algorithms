@@ -30,7 +30,7 @@ def decode(digits, base):
         return int(result)
     
     # TODO: Decode digits from hexadecimal (base 16)
-    if base == 16:
+    elif base == 16:
         sum = 0
         power = len(digits)
         for value in digits:
@@ -40,8 +40,15 @@ def decode(digits, base):
         return int(sum)
 
     # TODO: Decode digits from any base (2 up to 36)
-    # ...
-
+    else:
+        sum = 0
+        power = len(digits)
+        for value in digits:
+            print(value)
+            power -= 1
+            sum += string.printable.index(value.lower()) * math.pow(base, power)
+        return int(sum)
+        
 
 def encode(number, base):
     """Encode given number in base 10 to digits in given base.
@@ -96,4 +103,5 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    # main()
+    print(decode('acz', 36))
