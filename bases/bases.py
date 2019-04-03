@@ -19,7 +19,6 @@ def decode(digits, base):
     # Handle up to base 36 [0-9a-z]
     assert 2 <= base <= 36, 'base is out of range: {}'.format(base)
     # TODO: Decode digits from binary (base 2)
-    # ...
     if base == 2 :
         result = 0
         nth = -1
@@ -27,11 +26,19 @@ def decode(digits, base):
             nth += 1
             if value == "1" :
                 print(nth)
-                result += int(math.pow(2, int(nth)))
-        return result
+                result += math.pow(2, nth)
+        return int(result)
     
     # TODO: Decode digits from hexadecimal (base 16)
-    # ...
+    if base == 16:
+        sum = 0
+        power = len(digits)
+        for value in digits:
+            print(value)
+            power -= 1
+            sum += string.hexdigits.index(value.lower()) * math.pow(16, power)
+        return int(sum)
+
     # TODO: Decode digits from any base (2 up to 36)
     # ...
 
