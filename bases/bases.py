@@ -98,7 +98,7 @@ def encode(number, base):
             return number
 
         while number != 0 :
-            remainder = string.hexdigits[number % 16].upper()
+            remainder = string.hexdigits[number % 16]
             returnValue = str(remainder) + returnValue 
 
             # get integer quotient for the next iteration
@@ -116,7 +116,7 @@ def encode(number, base):
             return number
 
         while number != 0 :
-            remainder = string.printable[number % base].upper()
+            remainder = string.printable[number % base]
             returnValue = str(remainder) + returnValue 
 
             # get integer quotient for the next iteration
@@ -135,7 +135,30 @@ def convert(digits, base1, base2):
     assert 2 <= base1 <= 36, 'base1 is out of range: {}'.format(base1)
     assert 2 <= base2 <= 36, 'base2 is out of range: {}'.format(base2)
     # TODO: Convert digits from base 2 to base 16 (and vice versa)
-    # ...
+    
+    finalResult = ''
+
+    # exclude spaces from the inputted binary digit
+    digits = digits.replace(" ", "")
+
+    # make sure the input is sectioned by 4
+    zeroNeededinfront = 4- (len(digits) % 4)
+    if zeroNeededinfront != 4 :
+        digits = '0' * zeroNeededinfront + digits
+    
+    # we are gonna loop through the sections of the input (each includes 4 numbers) and convert each section to hex
+    # start at index 3, grab four numbers before current index including current index, until the end of the digits
+    for i in range(3, len(digits), 4):
+        section = digits[i-3:i+1]
+        # decode this section binaryToDecimal/hexToDecimal
+        decimal = decode(section, base1)
+        # encode this section's decimal into hex/binary
+        resultOfSection = str(encode(decimal, base2))
+
+        finalResult += resultOfSection
+
+    return finalResult
+
     # TODO: Convert digits from base 2 to base 10 (and vice versa)
     # ...
     # TODO: Convert digits from base 10 to base 16 (and vice versa)
