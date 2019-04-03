@@ -25,7 +25,6 @@ def decode(digits, base):
         for value in reversed(digits):
             nth += 1
             if value == "1" :
-                print(nth)
                 result += math.pow(2, nth)
         return int(result)
     
@@ -34,7 +33,6 @@ def decode(digits, base):
         sum = 0
         power = len(digits)
         for value in digits:
-            print(value)
             power -= 1
             sum += string.hexdigits.index(value.lower()) * math.pow(16, power)
         return int(sum)
@@ -44,7 +42,6 @@ def decode(digits, base):
         sum = 0
         power = len(digits)
         for value in digits:
-            print(value)
             power -= 1
             sum += string.printable.index(value.lower()) * math.pow(base, power)
         return int(sum)
@@ -136,28 +133,29 @@ def convert(digits, base1, base2):
     assert 2 <= base2 <= 36, 'base2 is out of range: {}'.format(base2)
     # TODO: Convert digits from base 2 to base 16 (and vice versa)
     
-    finalResult = ''
-
     # exclude spaces from the inputted binary digit
     digits = digits.replace(" ", "")
 
-    # make sure the input is sectioned by 4
-    zeroNeededinfront = 4- (len(digits) % 4)
-    if zeroNeededinfront != 4 :
-        digits = '0' * zeroNeededinfront + digits
-    
-    # we are gonna loop through the sections of the input (each includes 4 numbers) and convert each section to hex
-    # start at index 3, grab four numbers before current index including current index, until the end of the digits
-    for i in range(3, len(digits), 4):
-        section = digits[i-3:i+1]
-        # decode this section binaryToDecimal/hexToDecimal
-        decimal = decode(section, base1)
-        # encode this section's decimal into hex/binary
-        resultOfSection = str(encode(decimal, base2))
+    if (base1 == 2 & base2 == 16) or (base1 == 16 & base2 == 2):
+        finalResult = ''
 
-        finalResult += resultOfSection
+        # make sure the input is sectioned by 4
+        zeroNeededinfront = 4- (len(digits) % 4)
+        if zeroNeededinfront != 4 :
+            digits = '0' * zeroNeededinfront + digits
+        
+        # we are gonna loop through the sections of the input (each includes 4 numbers) and convert each section to hex
+        # start at index 3, grab four numbers before current index including current index, until the end of the digits
+        for i in range(3, len(digits), 4):
+            section = digits[i-3:i+1]
+            # decode this section binaryToDecimal/hexToDecimal
+            decimal = decode(section, base1)
+            # encode this section's decimal into hex/binary
+            resultOfSection = str(encode(decimal, base2))
 
-    return finalResult
+            finalResult += resultOfSection
+
+        return finalResult
 
     # TODO: Convert digits from base 2 to base 10 (and vice versa)
     # ...
@@ -166,6 +164,10 @@ def convert(digits, base1, base2):
     # TODO: Convert digits from any base to any base (2 up to 36)
     # ...
 
+    else:
+        decimal = decode(digits, base1)
+        result = str(encode(decimal, base2))
+        return result
 
 def main():
     """Read command-line arguments and convert given digits between bases."""
@@ -176,19 +178,17 @@ def main():
         base1 = int(args[1])
         base2 = int(args[2])
         # Convert given digits between bases
-        # result = convert(digits, base1, base2)
-        # print('{} in base {} is {} in base {}'.format(digits, base1, result, base2))
+        result = convert(digits, base1, base2)
+        print('{} in base {} is {} in base {}'.format(digits, base1, result, base2))
     else:
         print('Usage: {} digits base1 base2'.format(sys.argv[0]))
         print('Converts digits from base1 to base2')
 
 
 if __name__ == '__main__':
-    # main()
-    # print(decode('123', 10))
-    print(encode(237, 36))
-    print(encode(1, 36))
-    print(encode(0, 36))
-    print(encode(15, 36))
-    print(encode(54, 36))
-    print(encode(255, 36))
+    main()
+
+    decimal = decode('11001001', 2)
+    print(decimal)
+    result = str(encode(decimal, 16))
+    print(result)
