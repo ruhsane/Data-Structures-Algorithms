@@ -82,6 +82,15 @@ class BasesDecodeTest(unittest.TestCase):
         assert decode('101101', 32) == 33588225
         assert decode('101101', 36) == 60514129
 
+    def test_decode_fraction(self):
+        assert decode('1101.101', 2) == 13.625
+        assert decode('1101.101', 8) == 577.126953125
+        assert decode('1101.101', 10) == 1101.101
+        assert decode('1101.101', 16) == 4353.062744140625
+        assert decode('1101.101', 25) == 16251.040064
+        assert decode('1101.101', 32) == 33793.03128051758
+        assert decode('1101.101', 36) == 47953.02779921125
+
 
 class BasesEncodeTest(unittest.TestCase):
 

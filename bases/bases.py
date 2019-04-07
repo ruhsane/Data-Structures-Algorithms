@@ -1,7 +1,6 @@
 #!python
 
 import string
-import math
 # Hint: Use these string constants to encode/decode hexadecimal digits and more
 # string.digits is '0123456789'
 # string.hexdigits is '0123456789abcdefABCDEF'
@@ -18,33 +17,41 @@ def decode(digits, base):
     return: int -- integer representation of number (in base 10)"""
     # Handle up to base 36 [0-9a-z]
     assert 2 <= base <= 36, 'base is out of range: {}'.format(base)
-    # TODO: Decode digits from binary (base 2)
-    if base == 2 :
-        result = 0
-        nth = -1
-        for value in reversed(digits):
-            nth += 1
-            if value == "1" :
-                result += math.pow(2, nth)
-        return int(result)
-    
-    # TODO: Decode digits from hexadecimal (base 16)
-    elif base == 16:
-        sum = 0
-        power = len(digits)
-        for value in digits:
-            power -= 1
-            sum += string.hexdigits.index(value.lower()) * math.pow(16, power)
-        return int(sum)
 
-    # TODO: Decode digits from any base (2 up to 36)
+    fractional = False
+    result = 0
+    power = len(digits)
+
+    #handle fractional number
+    if '.' in digits:
+        # get the length of characters before the dicimal point. set it as the power. so later when we minus 1 from the power after the dot, it becomes negative
+        power = len(digits.split('.')[0])
+
+        if base != 10:
+            #remove the decimal point since later we are gonna math.power each character in the string
+            digits = digits.replace(".", "")
+
+        #set fractional = true
+        fractional = True
+
+    if base == 10:
+        if '.' in digits:
+            result = float(digits)
+        else:
+            result = int(digits)
+    
+    # Decode digits from any base (2 up to 36)
     else:
-        sum = 0
-        power = len(digits)
         for value in digits:
             power -= 1
-            sum += string.printable.index(value.lower()) * math.pow(base, power)
-        return int(sum)
+            result += string.printable.index(value.lower()) * (base ** power)
+
+    if fractional == True :
+        print(result)
+
+        return result
+    else:
+        return int(result)
 
 
 def encode(number, base):
