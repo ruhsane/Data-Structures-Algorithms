@@ -14,15 +14,17 @@ def factorial(n):
 
 def factorial_iterative(n):
     # implement the factorial function iteratively 
-    if n == 0 or n == 1:
-        return 1
-    # check if n is an integer larger than the base cases
-    elif n > 1:
-        result = 1
-        while n != 1 :
-            result = result * n
-            n -= 1
-        return result
+
+    # start with factorial 1
+    factorial = 1
+
+    # while the num is greater than 1
+    while n > 1:
+        # product the factorial with n until n is 1
+        factorial *= n
+        # decrease the n by 1
+        n -= 1
+    return factorial
 
 def factorial_recursive(n):
     # check if n is one of the base cases
