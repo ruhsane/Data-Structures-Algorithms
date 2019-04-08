@@ -76,6 +76,7 @@ def binary_search_recursive(array, item, left=None, right=None):
         left = 0
         right = len(array) - 1
     
+    # recursively call function only if the leftMost index and rightMost index doesnt cross over
     if right <= left:
         # get the middle index
         mid = (left + right) // 2
@@ -94,12 +95,7 @@ def binary_search_recursive(array, item, left=None, right=None):
             # starting point will not change, ending point will be one less than the current middle value. and we will only look at the left side
             right = mid - 1
 
-    # # check if we are now only looking at one last thing in the array
-    # if left == right :
-    #     # check if the last thing is the item we are looking for
-    #     if item == array[left]:
-    #         return left
-    #     # if the last item is not the item we are looking for, means the item is not in the list
-    #     return None
-
         return binary_search_recursive(array, item, left, right)
+
+    # after right crossed over left, if never found, return none
+    return None
