@@ -20,12 +20,13 @@ def linear_search_recursive(array, item, index=0):
     # TODO: implement linear search recursively here
     # once implemented, change linear_search to call linear_search_recursive
     # to verify that your recursive implementation passes all tests
-    if array[index] == item:
+    if len(array) <= index:   #check valid index
+        return None
+    elif array[index] == item:  # item found
         return index
-    elif index < len(array) -1 :
-        index += 1
-        return linear_search_recursive(array, item, index)
-    return None
+    else:
+        # call the function recursively for following index
+        return linear_search_recursive(array, item, index + 1)
 
 
 def binary_search(array, item):
@@ -44,8 +45,41 @@ def binary_search_iterative(array, item):
     left = 0
     right = len(array) - 1
 
-    while left != right:
+    while left <= right:
         mid = (left + right) // 2
+        # if the item is in middle index, it is found and done
+        if array[mid] == item:
+            return mid #found
+
+        # if the middle value is less than (left side of) our target 
+        elif array[mid] < item:
+            # make the starting point one more than the middle, and we will only look at the right side
+            left = mid+1
+
+        # if the middle value is greater than (right side of) our target 
+        elif array[mid] > item:
+            # starting point will not change, ending point will be one less than the current middle value. and we will only look at the left side
+            right = mid - 1
+
+    # after while loop, if never found, return none
+    return None
+
+
+def binary_search_recursive(array, item, left=None, right=None):
+    # TODO: implement binary search recursively here
+    # once implemented, change binary_search to call binary_search_recursive
+    # to verify that your recursive implementation passes all tests
+
+  
+    # this only runs first iteration
+    if left == None and right == None:
+        left = 0
+        right = len(array) - 1
+    
+    if right <= left:
+        # get the middle index
+        mid = (left + right) // 2
+
         # if the item is in middle index, it is found and done
         if array[mid] == item:
             return mid #found
@@ -60,46 +94,12 @@ def binary_search_iterative(array, item):
             # starting point will not change, ending point will be one less than the current middle value. and we will only look at the left side
             right = mid - 1
 
-    if array[left] == item:
-        return left
-    else:
-        return None
+    # # check if we are now only looking at one last thing in the array
+    # if left == right :
+    #     # check if the last thing is the item we are looking for
+    #     if item == array[left]:
+    #         return left
+    #     # if the last item is not the item we are looking for, means the item is not in the list
+    #     return None
 
-
-def binary_search_recursive(array, item, left=None, right=None):
-    # TODO: implement binary search recursively here
-    # once implemented, change binary_search to call binary_search_recursive
-    # to verify that your recursive implementation passes all tests
-
-  
-    # this only runs first iteration
-    if left == None and right == None:
-        left = 0
-        right = len(array) - 1
-    
-    # get the middle index
-    mid = (left + right) // 2
-
-    # if the item is in middle index, it is found and done
-    if array[mid] == item:
-        return mid #found
-
-    # if the middle value is less than (left side of) our target 
-    if array[mid] < item:
-        # make the starting point one more than the middle, and we will only look at the right side
-        left = mid+1
-
-    # if the middle value is greater than (right side of) our target 
-    elif array[mid] > item:
-        # starting point will not change, ending point will be one less than the current middle value. and we will only look at the left side
-        right = mid - 1
-
-    # check if we are now only looking at one last thing in the array
-    if left == right :
-        # check if the last thing is the item we are looking for
-        if item == array[left]:
-            return left
-        # if the last item is not the item we are looking for, means the item is not in the list
-        return None
-
-    return binary_search_recursive(array, item, left, right)
+        return binary_search_recursive(array, item, left, right)
