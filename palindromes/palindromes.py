@@ -31,7 +31,7 @@ def is_palindrome_iterative(text):
     right = len(text) - 1
 
     # run loop until leftMost index and rightMost index cross over
-    while left <= right:
+    while left < right:
         # if the leftMost value and rightMost value in current iteration are not the same, return false
         if text[left] != text[right]:
             return False
@@ -55,7 +55,7 @@ def is_palindrome_recursive(text, left=None, right=None):
         right = len(text) - 1
     
     # recursively call function only if the left index and right index doesnt cross over
-    if left <= right:
+    if left < right:
         # if the left value and right value are not the same, return false
         if text[left] != text[right]:
             return False
