@@ -23,9 +23,6 @@ def is_palindrome_iterative(text):
     # once implemented, change is_palindrome to call is_palindrome_iterative
     # to verify that your iterative implementation passes all tests
 
-    # if text == '':
-    #     return True
-
     filteredText = ''.join(c for c in text.lower() if c in string.ascii_lowercase)
     print(filteredText)
 
