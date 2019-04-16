@@ -73,13 +73,16 @@ class LinkedList(object):
     def get_at_index(self, index):
         """Return the item at the given index in this linked list, or
         raise ValueError if the given index is out of range of the list size.
-        Best case running time: O(1) if index is 0
-        Worst case running time: O(n) if index is at the end of the list"""
+        Best case running time: O(1) if index is 0 so we return the head data or if index is at the tail so we just have to return tail data
+        Worst case running time: O(n) if index is near the end of the list"""
         # Check if the given index is out of range and if so raise an error
         if not (0 <= index < self.size):
             raise ValueError('List index out of range: {}'.format(index))
         # TODO: Find the node at the given index and return its data
 
+        if index == self.size - 1:
+            return self.tail.data
+        
         node = self.head
         current_index = 0
         while node is not None:
