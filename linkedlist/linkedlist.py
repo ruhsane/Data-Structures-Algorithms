@@ -108,15 +108,18 @@ class LinkedList(object):
         else:   # if 0 < index < self.size
 
             new_node = Node(item)
-            node = self.head
+            curr_node = self.head
+            prev = curr_node
             current_index = 0
-            while node is not None:
+            while curr_node is not None:
                 if current_index == index:
-                    new_node.next = node.next
-                    node.next = new_node
+                    new_node.next = curr_node
+                    prev.next = new_node
                     self.size += 1
+                    return
                 else:
-                    node = node.next
+                    prev = curr_node
+                    curr_node = curr_node.next
                     current_index += 1
             return None
 
