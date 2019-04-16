@@ -181,6 +181,11 @@ class LinkedList(object):
         # TODO: Find the node containing the given old_item and replace its
         # data with new_item, without creating a new node object
         
+
+        if self.tail.data == old_item:
+            self.tail.data = new_item
+            return
+
         node = self.head
 
         while node is not None:
