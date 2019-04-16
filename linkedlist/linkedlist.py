@@ -125,7 +125,7 @@ class LinkedList(object):
 
     def append(self, item):
         """Insert the given item at the tail of this linked list.
-        Best and worst case running time: ??? under what conditions? [TODO]"""
+        Best and worst case running time: O(1) since we just add next value to the tail or just assign self.head if list is empty"""
         # Create a new node to hold the given item
         new_node = Node(item)
         # Check if this linked list is empty
@@ -141,7 +141,7 @@ class LinkedList(object):
 
     def prepend(self, item):
         """Insert the given item at the head of this linked list.
-        Best and worst case running time: ??? under what conditions? [TODO]"""
+        Best and worst case running time: O(1) since we just add item to the beginning of the list"""
         # Create a new node to hold the given item
         new_node = Node(item)
         # Check if this linked list is empty
