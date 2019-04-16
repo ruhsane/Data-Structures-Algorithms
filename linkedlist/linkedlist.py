@@ -176,8 +176,8 @@ class LinkedList(object):
     def replace(self, old_item, new_item):
         """Replace the given old_item in this linked list with given new_item
         using the same node, or raise ValueError if old_item is not found.
-        Best case running time: ??? under what conditions? [TODO]
-        Worst case running time: ??? under what conditions? [TODO]"""
+        Best case running time: O(1) if the old_item is the first node or the tail
+        Worst case running time: O(N) if the old_item is the node right before the tail, we have to loop through all the nodes til n-1. n = size of the linkedlist"""
         # TODO: Find the node containing the given old_item and replace its
         # data with new_item, without creating a new node object
         
