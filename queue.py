@@ -41,14 +41,19 @@ class LinkedQueue(object):
         # TODO: Return front item, if any
         if self.is_empty():
             return None
-        return self.list.get_at_index(0)
+        return self.list.head.data
 
     def dequeue(self):
         """Remove and return the item at the front of this queue,
         or raise ValueError if this queue is empty.
         Running time: O(???) – Why? [TODO]"""
         # TODO: Remove and return front item, if any
-
+        if self.is_empty():
+            raise ValueError('Queue is empty')
+        else:
+            front = self.front()
+            self.list.delete(front)
+            return front
 
 # Implement ArrayQueue below, then change the assignment at the bottom
 # to use this Queue implementation to verify it passes all tests
