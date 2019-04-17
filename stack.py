@@ -31,9 +31,9 @@ class LinkedStack(object):
 
     def push(self, item):
         """Insert the given item on the top of this stack.
-        Running time: O(1) because we only have to change the linkedList tail's next property """
+        Running time: O(1) because we only have to change the linkedList head property """
         # Push given item
-        return self.list.append(item)
+        return self.list.prepend(item)
 
     def peek(self):
         """Return the item on the top of this stack without removing it,
@@ -41,12 +41,12 @@ class LinkedStack(object):
         # Return top item, if any
         if self.is_empty():
             return None
-        return self.list.tail.data
+        return self.list.head.data
 
     def pop(self):
         """Remove and return the item on the top of this stack,
         or raise ValueError if this stack is empty.
-        Running time: O(n) because linkedList.delete method loops over all the nodes to find the item to delete """
+        Running time: O(1) because linkedList.delete method just finds the first index and removes it """
         # Remove and return top item, if any
         if self.is_empty():
             raise ValueError('Stack is empty')
@@ -111,5 +111,5 @@ class ArrayStack(object):
 
 # Implement LinkedStack and ArrayStack above, then change the assignment below
 # to use each of your Stack implementations to verify they each pass all tests
-# Stack = LinkedStack
-Stack = ArrayStack
+Stack = LinkedStack
+# Stack = ArrayStack
