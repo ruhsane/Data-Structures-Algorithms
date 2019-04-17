@@ -33,6 +33,7 @@ class LinkedQueue(object):
         """Insert the given item at the back of this queue.
         Running time: O(???) – Why? [TODO]"""
         # TODO: Insert given item
+        return self.list.append(item)
 
     def front(self):
         """Return the item at the front of this queue without removing it,
