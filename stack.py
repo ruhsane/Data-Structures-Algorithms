@@ -109,7 +109,8 @@ class ArrayStack(object):
             raise ValueError('Stack is empty')
         else:
             top = self.peek()
-            self.list.remove(top)
+            last_index = self.length() - 1
+            self.list.pop(last_index)
             return top
 
 
