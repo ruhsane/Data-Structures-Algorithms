@@ -69,38 +69,39 @@ def find_all_indexes(text, pattern):
     or an empty list if not found."""
     assert isinstance(text, str), 'text is not a string: {}'.format(text)
     assert isinstance(pattern, str), 'pattern is not a string: {}'.format(text)
-    # TODO: Implement find_all_indexes here (iteratively and/or recursively)
     
+    indexes_list = []
 
-    # indexes_list = []
+    # text will never contain the pattern if pattern is larger
+    if len(pattern) > len(text):        
+        return indexes_list
+    if pattern == "":
+        for i in range(len(text)):
+            indexes_list.append(i)
+        return indexes_list
 
-    # if pattern in text:
-    #     index = text.index(pattern)
-    #     print(index)
+    current_text_index = 0
+    current_pattern_index = 0
 
-    #     indexes_list.append(index)
-    #     print(indexes_list)
-    #     text = text.replace(pattern," "*len(pattern),1)
-    #     print(text)
-    #     return find_all_indexes(text, pattern)
-
-
-    # while text != '':
-    #     index = text.index(pattern)
-    #     print(index)
-
-    #     indexes_list.append(index)
-    #     print(indexes_list)
-
-    #     text = text.replace(pattern," "*len(pattern),1)
-    #     print(text)
+    while current_text_index != len(text):
         
-    #     if pattern in text:
-    #         continue
-    #     else:
-    #         break
+        if text[current_text_index] == pattern[current_pattern_index]:
+            current_pattern_index += 1
+            current_text_index += 1
 
-    # return indexes_list
+            if current_pattern_index == len(pattern):
+                indexes_list.append(current_text_index - len(pattern))
+                current_text_index = current_text_index - current_pattern_index + 1
+                current_pattern_index = 0
+
+        else:
+            if current_pattern_index != 0:
+                current_text_index = current_text_index - current_pattern_index + 1
+            else:
+                current_text_index += 1
+            current_pattern_index = 0
+
+    return indexes_list
 
 def test_string_algorithms(text, pattern):
     # found = contains(text, pattern)
@@ -133,4 +134,5 @@ def main():
 
 if __name__ == '__main__':
     # main()
-    contains('abc', 'z')
+    # print(find_all_indexes('abc', ''))
+    print(find_all_indexes('aaa', 'aa'))
