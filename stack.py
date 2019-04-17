@@ -104,7 +104,13 @@ class ArrayStack(object):
         or raise ValueError if this stack is empty.
         Running time: O(???) – Why? [TODO]"""
         # TODO: Remove and return top item, if any
-
+        
+        if self.is_empty():
+            raise ValueError('Stack is empty')
+        else:
+            top = self.peek()
+            self.list.remove(top)
+            return top
 
 
 # Implement LinkedStack and ArrayStack above, then change the assignment below
