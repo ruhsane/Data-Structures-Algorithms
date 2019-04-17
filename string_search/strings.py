@@ -37,11 +37,32 @@ def find_index(text, pattern):
     or None if not found."""
     assert isinstance(text, str), 'text is not a string: {}'.format(text)
     assert isinstance(pattern, str), 'pattern is not a string: {}'.format(text)
-    # TODO: Implement find_index here (iteratively and/or recursively)
-    if pattern in text:
-        return text.index(pattern)
-    else:
+
+    # text will never contain the pattern if pattern is larger
+    if len(pattern) > len(text):        
         return None
+    if pattern == "":
+        return 0
+
+    current_text_index = 0
+    current_pattern_index = 0
+
+    while current_text_index != len(text):
+        
+        if text[current_text_index] == pattern[current_pattern_index]:
+            current_pattern_index += 1
+            current_text_index += 1
+
+            if current_pattern_index == len(pattern):
+                return current_text_index - len(pattern) 
+        else:
+            if current_pattern_index != 0:
+                current_text_index = current_text_index - current_pattern_index + 1
+            else:
+                current_text_index += 1
+            current_pattern_index = 0
+
+    return None
 
 def find_all_indexes(text, pattern):
     """Return a list of starting indexes of all occurrences of pattern in text,
