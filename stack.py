@@ -96,14 +96,15 @@ class ArrayStack(object):
         # TODO: Return top item, if any
         if self.is_empty():
             return None
-        last_index = self.length - 1
-        return self.list.index(last_index)
+        last_index = self.length() - 1
+        return self.list[last_index]
 
     def pop(self):
         """Remove and return the item on the top of this stack,
         or raise ValueError if this stack is empty.
         Running time: O(???) – Why? [TODO]"""
         # TODO: Remove and return top item, if any
+
 
 
 # Implement LinkedStack and ArrayStack above, then change the assignment below
