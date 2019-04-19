@@ -75,30 +75,50 @@ def find_all_indexes(text, pattern):
     # text will never contain the pattern if pattern is larger
     if len(pattern) > len(text):        
         return indexes_list
+    # if we are looking for empty string
     if pattern == "":
         for i in range(len(text)):
             indexes_list.append(i)
+        # return all the indexes
         return indexes_list
 
     current_text_index = 0
     current_pattern_index = 0
 
+    # loop through until the end of the text
     while current_text_index != len(text):
         
+        # if current text character matchess with current pattern character
         if text[current_text_index] == pattern[current_pattern_index]:
+            # increment text index and pattern index
             current_pattern_index += 1
             current_text_index += 1
 
+            # after incrementing, if we have reached the end of pattern - meaning we found it
             if current_pattern_index == len(pattern):
+                # to get the pattern's first index in text, minus the length of pattern from current text index
+                # append the pattenr's first index to the result list
                 indexes_list.append(current_text_index - len(pattern))
+
+                # reset the current text index to the second character index of the pattern we just found
                 current_text_index = current_text_index - current_pattern_index + 1
+
+                # reset pattern index to 0 to find the next pattern
                 current_pattern_index = 0
 
+        # if pattern character doesnt match text character
         else:
+            # interrupted : characters didnt match during the pattern search
             if current_pattern_index != 0:
+                # set the current index back to 1 + the first character that matched with pattern
                 current_text_index = current_text_index - current_pattern_index + 1
+
+            # regular searching
             else:
+                # increment text index
                 current_text_index += 1
+
+            # pattern index set to 0 
             current_pattern_index = 0
 
     return indexes_list
@@ -133,4 +153,5 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    # main()
+    print(find_all_indexes('aaaaaaaaaaaaaaa', 'aaaa'))
