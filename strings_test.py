@@ -89,8 +89,8 @@ class StringsTest(unittest.TestCase):
         assert find_all_indexes('abc', 'abc') == [0]  # all strings contain themselves
         assert find_all_indexes('aaa', 'a') == [0, 1, 2]  # multiple occurrences
         assert find_all_indexes('aaa', 'aa') == [0, 1]  # overlapping pattern
-        # TODO: Write more positive test cases with assert equal list statements
-        # ...
+        assert find_all_indexes('aaaaaaaaaaaaaaa', 'aaaa') == [0,1,2,3,4,5,6,7,8,9,10,11]
+
 
     def test_find_all_indexes_with_non_matching_patterns(self):
         # Negative test cases (counterexamples) with non-matching patterns
@@ -115,7 +115,6 @@ class StringsTest(unittest.TestCase):
         assert find_all_indexes('abra cadabra', 'adab') == [6]  # overlapping prefix
         # TODO: Write more test cases that check complex patterns or edge cases
         # You'll need a lot more than this to test your algorithm's robustness
-        assert find_all_indexes('aaaaaaaaaaaaaaa', 'aaaa') == [0,1,2,3,4,5,6,7,8,9,10,11]
 
 if __name__ == '__main__':
     unittest.main()
