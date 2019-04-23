@@ -10,13 +10,13 @@ class Set(object):
 
         if elements is not None:
             for element in elements:
-                self.add(element)
+                for key, value in element:
+                    self.add(key, value)
 
-    def contains(self, element):
+    def contains(self, key):
         '''return a boolean indicating whether element is in this set'''
-        return self.set.contains(element.key)
+        return self.set.contains(key)
 
-    def add(self, element):
+    def add(self, key, value):
         '''add element to this set, if not present already'''
-        for key, value in element:
-            return self.set.set(key, value)
+        return self.set.set(key, value)
