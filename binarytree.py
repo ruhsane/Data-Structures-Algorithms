@@ -174,34 +174,34 @@ class BinarySearchTree(object):
             # TODO: Recursively descend to the node's right child, if it exists
             return self._find_node_recursive(item, node.right)
 
-    # def _find_parent_node_iterative(self, item):
-    #     """Return the parent node of the node containing the given item
-    #     (or the parent node of where the given item would be if inserted)
-    #     in this tree, or None if this tree is empty or has only a root node.
-    #     Search is performed iteratively starting from the root node.
-    #     TODO: Best case running time: ??? under what conditions?
-    #     TODO: Worst case running time: ??? under what conditions?"""
-    #     # Start with the root node and keep track of its parent
-    #     node = self.root
-    #     parent = None
-    #     # Loop until we descend past the closest leaf node
-    #     while node is not None:
-    #         # TODO: Check if the given item matches the node's data
-    #         if ...:
-    #             # Return the parent of the found node
-    #             return parent
-    #         # TODO: Check if the given item is less than the node's data
-    #         elif ...:
-    #             # TODO: Update the parent and descend to the node's left child
-    #             parent = ...
-    #             node = ...
-    #         # TODO: Check if the given item is greater than the node's data
-    #         elif ...:
-    #             # TODO: Update the parent and descend to the node's right child
-    #             parent = ...
-    #             node = ...
-    #     # Not found
-    #     return parent
+    def _find_parent_node_iterative(self, item):
+        """Return the parent node of the node containing the given item
+        (or the parent node of where the given item would be if inserted)
+        in this tree, or None if this tree is empty or has only a root node.
+        Search is performed iteratively starting from the root node.
+        TODO: Best case running time: ??? under what conditions?
+        TODO: Worst case running time: ??? under what conditions?"""
+        # Start with the root node and keep track of its parent
+        node = self.root
+        parent = None
+        # Loop until we descend past the closest leaf node
+        while node is not None:
+            # Check if the given item matches the node's data
+            if item == node.data:
+                # Return the parent of the found node
+                return parent
+            # Check if the given item is less than the node's data
+            elif item < node.data:
+                # Update the parent and descend to the node's left child
+                parent = node
+                node = node.left
+            # Check if the given item is greater than the node's data
+            elif item > node.data:
+                # Update the parent and descend to the node's right child
+                parent = node
+                node = node.right
+        # Not found
+        return parent
 
     def _find_parent_node_recursive(self, item, node, parent=None):
         """Return the parent node of the node containing the given item
