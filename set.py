@@ -83,3 +83,10 @@ class Set(object):
 
     def is_subset(self, other_set):
         ''' return a boolean indicating whether other_set is a subset of this set '''
+        # if other_set.size > self.size:
+        #     return False
+
+        for el in other_set:
+            if not self.contains(el):
+                return False
+        return True
