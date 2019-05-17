@@ -85,12 +85,10 @@ class SetTest(unittest.TestCase):
     def test_is_subset(self):
         test_set = Set(['Apple','Banana','Cactus','Durian'])
         subset = Set(['Apple', 'Banana'])
-        is_subset = test_set.is_subset(subset)
-        assert type(is_subset) == bool
-        assert subset.is_subset(test_set) == True
+        assert test_set.is_subset(subset) == True
 
         subset.add('Z')
         assert subset.is_subset(test_set) == False
-
+        
 if __name__ == '__main__':
     unittest.main()
