@@ -47,6 +47,8 @@ class Set(object):
 
     def intersection(self, other_set):
         ''' return a new set that is the intersection of this set and other_set '''
+
+        # compare their size to reduce running time
         if other_set.size > self.size:
             smaller_set = self
             larger_set = other_set
@@ -56,13 +58,28 @@ class Set(object):
 
         intersection = Set()
         
+        # iterate through the smaller set
         for el in smaller_set:
+            # if the element also in larger set, add to intersection
             if larger_set.contains(el):
                 intersection.add(el)
         return intersection
 
     def difference(self, other_set):
         ''' return a new set that is the difference of this set and other_set '''
+        # difference = this set minus intersection
+
+        #initialize result with this set
+        result = self
+        intersection = self.intersection(other_set)
+
+        # for every common element we have
+        for el in intersection:
+            # delete it out of this set
+            result.remove(el)
+
+        return result
+
 
     def is_subset(self, other_set):
         ''' return a boolean indicating whether other_set is a subset of this set '''
