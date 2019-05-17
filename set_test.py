@@ -15,15 +15,6 @@ class SetTest(unittest.TestCase):
         assert test_set.length() == 4
         
     def test_contains(self):
-        s = Set()
-        s.add('I', 1)
-        s.add('V', 5)
-        s.add('X', 10)
-        assert s.contains('I') is True
-        assert s.contains('V') is True
-        assert s.contains('X') is True
-        assert s.contains('A') is False
-
         test_set = Set(['Apple','Banana','Cactus','Durian'])
         assert test_set.length() == 4
         assert test_set.contains('Apple') == True
