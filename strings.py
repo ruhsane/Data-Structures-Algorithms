@@ -3,44 +3,22 @@
 def contains(text, pattern):
     """Return a boolean indicating whether pattern occurs in text.
             
-            Running time: worst case O(n) where n = len(text) that we have to search until the end of the text, iterate over every character
+    Complexity: worst case O(n) where n = len(text) that we have to search until the end of the text, iterate over every character
     """
     assert isinstance(text, str), 'text is not a string: {}'.format(text)
     assert isinstance(pattern, str), 'pattern is not a string: {}'.format(text)
-
-    # text will never contain the pattern if pattern is larger
-    if len(pattern) > len(text):        
-        return False
-    if pattern == "":
-        return True
-
-    current_text_index = 0
-    current_pattern_index = 0
-
-    while current_text_index != len(text):
-        
-        if text[current_text_index] == pattern[current_pattern_index]:
-            current_pattern_index += 1
-            current_text_index += 1
-
-            if current_pattern_index == len(pattern):
-                return True
-        else:
-            if current_pattern_index != 0:
-                current_text_index = current_text_index - current_pattern_index + 1
-            else:
-                current_text_index += 1
-            current_pattern_index = 0
-
-    return False
     
+    if find_index(text, pattern) is None:
+        return False
+    else:
+        return True
 
 def find_index(text, pattern):
     """Return the starting index of the first occurrence of pattern in text,
     or None if not found.
     
      n = len(text)
-     Running time: worst case O(n) where we have to iterate over every character to search for pattern match. 
+     Complexity: worst case O(n) where we have to iterate over every character to search for pattern match. 
 
     """
     assert isinstance(text, str), 'text is not a string: {}'.format(text)
@@ -76,7 +54,7 @@ def find_all_indexes(text, pattern):
     """Return a list of starting indexes of all occurrences of pattern in text,
     or an empty list if not found.
     
-    Running time: O(n) n = len(text) since we have to iterate over every character to search for every pattern match. 
+    Complexity: O(n) n = len(text) since we have to iterate over every character to search for every pattern match. 
     """
     assert isinstance(text, str), 'text is not a string: {}'.format(text)
     assert isinstance(pattern, str), 'pattern is not a string: {}'.format(text)
